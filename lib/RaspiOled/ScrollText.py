@@ -9,7 +9,7 @@ class new:
 
     def __init__(self,
                  area=((0,0),(128,64)),
-                 font='/usr/share/fonts/trutype/noto/NotoMono-Regular.ttf',
+                 font='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
                  size=16,
                  speed = 128
     ):
@@ -50,8 +50,8 @@ class new:
             while left > 0:
                 ww = min(left, self.tw - self.tx)
                 oled.image(self.image,
-                           dst_area=(wx,y,ww,self.th),
-                           src_area=(self.tx,0,ww,self.th))
+                           dst_area=(int(wx),int(y),int(ww),int(self.th)),
+                           src_area=(int(self.tx),0,int(ww),int(self.th)))
                 wx += ww
                 left -= ww
                 self.tx += ww
@@ -73,10 +73,11 @@ class new:
             if len(self.text) > 0:
                 c = self.text[0]
                 self.text = self.text[1:]
-                (w,h) = self.draw.textsize(c, font=self.font)
-                self.tw = w;
-                self.th = h; 
-                self.tx = 0;
+                w = self.draw.textlength(c, font=self.font)
+                h = self.font_size
+                self.tw = w
+                self.th = h
+                self.tx = 0
                 self.draw.rectangle((0,0,w,h),fill=0)
                 self.draw.text((0,0),c,font=self.font,fill=1)
             else:

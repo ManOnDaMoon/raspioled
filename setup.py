@@ -1,4 +1,4 @@
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 module1 = Extension('RaspiOled.oled',
                     sources = [ 'src/raspioled.c'])
